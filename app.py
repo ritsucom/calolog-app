@@ -22,17 +22,17 @@ height = 170.0  # cm
 st.title("毎日のカロリーログフォーム")
 
 # -------------------------
-# 📅 入力フォーム
+# 📅 入力フォーム（順番調整済み）
 # -------------------------
 weight = st.number_input("今日の体重 (kg)", min_value=30.0, max_value=150.0, step=0.1)
 cal_in = st.number_input("摂取カロリー (kcal)", min_value=0, max_value=10000, step=10)
-exercise_cal = st.number_input("運動で消費したカロリー (kcal)", min_value=0, max_value=5000, step=10)
-bowel = st.checkbox("排便があった")
 protein = st.number_input("たんぱく質 (g)", min_value=0.0, step=0.1)
 fat = st.number_input("脂質 (g)", min_value=0.0, step=0.1)
 carbs = st.number_input("炭水化物 (g)", min_value=0.0, step=0.1)
+exercise_cal = st.number_input("運動で消費したカロリー (kcal)", min_value=0, max_value=5000, step=10)
 sleep_hours = st.number_input("睡眠時間 (時間)", min_value=0.0, max_value=24.0, step=0.1)
 water = st.number_input("水分摂取量 (ml)", min_value=0, max_value=10000, step=100)
+bowel = st.checkbox("排便があった")
 eating_out = st.checkbox("外食した")
 
 # -------------------------
