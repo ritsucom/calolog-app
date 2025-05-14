@@ -75,6 +75,39 @@ if st.button("記録してフィードバック文を生成"):
     else:
         st.error(f"⚠️ Notion 送信エラー: {res.status_code}")
 
-    # ChatGPT 貼り付け用テキスト
-    st.markdown("### ChatGPT に貼ってアドバイスをもらう文章")
-    st.code(f"""【{today}】\n・体重：{weight}kg\n・摂取カロリー：{cal_in}kcal\n・消費カロリー：{total_out}kcal\n・差分：{diff}kcal\n・排便：{'あり' if bowel else 'なし'}\n・PFC：{protein}g / {fat}g / {carbs}g\n・睡眠時間：{sleep_hours}時間\n・水分摂取量：{water}ml\n・外食：{'あり' if eating_out else 'なし'}\n\nこの日の過ごし方について、ダイエットの観点でアドバイスをください。""")
+    # ChatGPT 貼り付け用テキスト（プロンプト自動生成）
+    st.markdown("### ChatGPT に貼って分析してもらうプロンプト")
+    prompt = f"""
+以下のデータを元に、私のダイエットと健康の進捗を以下の観点から詳細に分析してください。
+
+【目標】
+- 2025年11月末で体重73kg → 63.6kg（-9.4kg）
+- 体脂肪率：32% → 25〜26%
+- 胸とお尻に丸みを残しつつ、くびれと背中を引き締めたい
+
+【今日のデータ】
+- 体重：{weight}kg
+- 摂取カロリー：{cal_in}kcal
+- 消費カロリー：{total_out}kcal
+- 差分：{diff}kcal
+- 排便：{'あり' if bowel else 'なし'}
+- PFC：P{protein}g / F{fat}g / C{carbs}g
+- 睡眠時間：{sleep_hours}時間
+- 水分摂取量：{water}ml
+- 外食：{'あり' if eating_out else 'なし'}
+
+【分析してほしい観点】
+1. カロリー・PFCバランスの達成度（目標 P90g／1600〜1700kcal）
+2. 体重の短期・中期トレンド（前日比／週平均）と進捗評価
+3. 排便・腸内環境の状態と改善策（3日以上便がなければ特別対応）
+4. 外食や睡眠の影響の仮説と提案
+5. 明日の食事／行動プラン提案（停滞打破策も）
+6. 最後に、やる気が出るような励ましの言葉
+
+【出力スタイル】
+- 客観的・実用的なアドバイス
+- データに基づく具体的な提案
+- 前向きに続けられるメッセージも添えて
+"""
+    st.code(prompt)
+    st.markdown("---")
